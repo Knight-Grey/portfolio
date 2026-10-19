@@ -1,0 +1,8 @@
+# 素材原件目录不参与成站，避免误传到线上（体积大、含未采用素材）
+Paper&video media/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#2f54eb" />
+  <title>个人作品集</title>
+  <meta name="description" content="新闻传播学硕士个人作品集：视频作品、图文作品与联系方式。" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <!-- ============ 顶部导航 ============ -->
+  <header class="site-header">
+    <div class="wrap header__inner">
+      <a class="brand" href="#top">
+        <span class="brand__dot" aria-hidden="true"></span>
+        <span id="brand-name">作品集</span>
+      </a>
+      <nav class="nav" id="nav" aria-label="主导航"></nav>
+      <div class="header__actions">
+        <a class="btn btn--primary btn--sm" id="header-resume" href="#" hidden>下载简历</a>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="展开导航" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ 首屏 ============ -->
+    <section class="hero" id="top">
+      <div class="wrap hero__inner">
+        <div class="hero__text">
+          <p class="eyebrow" id="hero-eyebrow"></p>
+          <h1 class="hero__name" id="hero-name"></h1>
+          <p class="hero__title" id="hero-title"></p>
+          <p class="hero__tagline" id="hero-tagline"></p>
+          <div class="hero__actions" id="hero-actions"></div>
+        </div>
+        <aside class="hero__card">
+          <div class="avatar" id="hero-avatar" aria-hidden="true"></div>
+          <ul class="highlights" id="hero-highlights"></ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ 关于我 ============ -->
+    <section class="section" id="about">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="kicker" id="about-kicker"></p>
+          <h2 class="section__title" id="about-title"></h2>
+          <p class="section__desc" id="about-desc"></p>
+        </header>
+        <div class="stats" id="stats"></div>
+        <div class="about__body" id="about-body"></div>
+      </div>
+    </section>
+
+    <!-- ============ 视频作品 ============ -->
+    <section class="section" id="video" hidden>
+      <div class="wrap">
+        <header class="section__head">
+          <p class="kicker" id="video-kicker"></p>
+          <h2 class="section__title" id="video-title"></h2>
+          <p class="section__desc" id="video-desc"></p>
+        </header>
+        <div class="chips" id="video-chips" hidden></div>
+        <div class="grid" id="video-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============ 图文作品 ============ -->
+    <section class="section" id="article" hidden>
+      <div class="wrap">
+        <header class="section__head">
+          <p class="kicker" id="article-kicker"></p>
+          <h2 class="section__title" id="article-title"></h2>
+          <p class="section__desc" id="article-desc"></p>
+        </header>
+        <div class="chips" id="article-chips" hidden></div>
+        <div class="grid" id="article-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============ 实习与实践 ============ -->
+    <section class="section" id="experience" hidden>
+      <div class="wrap">
+        <header class="section__head">
+          <p class="kicker" id="experience-kicker"></p>
+          <h2 class="section__title" id="experience-title"></h2>
+          <p class="section__desc" id="experience-desc"></p>
+        </header>
+        <div class="timeline" id="experience-list"></div>
+      </div>
+    </section>
+
+    <!-- ============ 联系方式 ============ -->
+    <section class="section" id="contact">
+      <div class="wrap">
+        <header class="section__head">
+          <p class="kicker" id="contact-kicker"></p>
+          <h2 class="section__title" id="contact-title"></h2>
+          <p class="section__desc" id="contact-desc"></p>
+        </header>
+        <div class="socials" id="socials"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer__inner">
+      <span id="footer-text"></span>
+      <span class="footer__hint">本站由静态页面搭建，内容可在 data.js 中随时修改</span>
+    </div>
+  </footer>
+
+  <!-- ============ 作品弹层（视频播放 / 作品详情） ============ -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" data-close></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-label="作品详情">
+      <button class="modal__close" type="button" data-close aria-label="关闭">✕</button>
+      <div class="modal__media" id="modal-media" hidden></div>
+      <div class="modal__content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <noscript>
+    <p style="padding:24px;text-align:center">本页内容由 JavaScript 渲染，请在浏览器中启用 JavaScript。</p>
+  </noscript>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

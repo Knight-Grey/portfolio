@@ -1,0 +1,93 @@
+/* 文章阅读页样式（assets/articles/ 下的页面共用） */
+
+:root {
+  --fg: #111318;
+  --fg-soft: #3f4550;
+  --muted: #8b929e;
+  --bg: #ffffff;
+  --border: #e7e9ef;
+  --accent: #2f54eb;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #eef1f6;
+    --fg-soft: #b7bdc9;
+    --muted: #868d99;
+    --bg: #0e1014;
+    --border: #252a34;
+    --accent: #93a9ff;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 17px;
+  line-height: 1.95;
+  -webkit-font-smoothing: antialiased;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.bar a { color: var(--accent); text-decoration: none; }
+.bar a:hover { text-decoration: underline; }
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 48px 24px 88px;
+}
+
+h1 {
+  font-size: clamp(24px, 3.4vw, 32px);
+  line-height: 1.45;
+  letter-spacing: -.01em;
+  margin: 0 0 18px;
+}
+
+.meta {
+  margin: 0 0 34px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.body p {
+  margin: 0 0 1.15em;
+  color: var(--fg-soft);
+  text-align: justify;
+}
+
+.foot {
+  margin: 56px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .container { padding: 32px 18px 64px; }
+}
