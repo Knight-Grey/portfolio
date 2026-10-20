@@ -76,6 +76,45 @@
     setText('#hero-name', val(PROFILE.name, '你的名字'));
     setText('#hero-title', PROFILE.title);
     setText('#hero-tagline', PROFILE.tagline);
+    var tagline = $('#hero-tagline');
+    if (tagline) tagline.hidden = blank(PROFILE.tagline);
+
+    // 数字条：优先用 data.js 里的 heroMetrics；留空数组则按条目数自动计算
+    var metrics = $('#hero-metrics');
+    if (metrics) {
+      metrics.innerHTML = '';
+      var picks = list(PROFILE.heroMetrics);
+      if (!picks.length) {
+        picks = [
+          { num: list(D.videoWorks).length, label: '支成片' },
+          { num: list(D.articleWorks).length, label: '篇图文' },
+          { num: list(D.experiences).length, label: '段实习实践' }
+        ].filter(function (m) { return Number(m.num) > 0; });
+      }
+      picks.forEach(function (m) {
+        if (!m || blank(m.num)) return;
+        var cell = el('div', 'hero__metric');
+        cell.appendChild(el('div', 'hero__metric-num', m.num));
+        if (!blank(m.label)) cell.appendChild(el('div', 'hero__metric-label', m.label));
+        metrics.appendChild(cell);
+      });
+      metrics.hidden = !metrics.children.length;
+      if (metrics.children.length) {
+        var heroEl = document.getElementById('top');
+        if (heroEl) heroEl.classList.add('has-metrics');
+      }
+    }
+
+    // 档期提示
+    var avail = $('#hero-avail');
+    if (avail) {
+      if (blank(PROFILE.availability)) {
+        avail.hidden = true;
+      } else {
+        avail.textContent = PROFILE.availability;
+        avail.hidden = false;
+      }
+    }
 
     // 头像：有图用图，没图用姓氏首字
     var avatar = $('#hero-avatar');
@@ -118,6 +157,140 @@
     a.href = href;
     if (blankTarget) { a.target = '_blank'; a.rel = 'noopener'; }
     return a;
+  }
+
+  /* ---------------- 首屏三个快捷入口 ---------------- */
+  // 缩略图左上角的板块角标：点它只跳板块，不触发卡片本体的播放 / 详情
+  function thumbJumpChip(cfg) {
+    if (blank(cfg.label) || blank(cfg.section)) return null;
+    var chip = el('a', 'thumb__jump', cfg.label);
+    chip.href = '#' + cfg.section;
+    chip.title = '跳到「' + cfg.label + '」板块';
+    chip.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+    chip.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') e.stopPropagation();
+    });
+    return chip;
+  }
+
+  function jumpThumb(cfg, withPlay) {
+    var t = el('div', 'thumb');
+    if (blank(cfg.cover)) {
+      var ph = el('div', 'thumb__ph');
+      ph.appendChild(el('span', null, val(cfg.label, '封面')));
+      t.appendChild(ph);
+    } else {
+      var img = new Image();
+      img.className = 'thumb__img';
+      img.loading = 'lazy';
+      img.alt = val(cfg.title, '封面');
+      img.onerror = function () {
+        if (img.parentNode) img.parentNode.removeChild(img);
+        var ph2 = el('div', 'thumb__ph');
+        ph2.appendChild(el('span', null, val(cfg.label, '封面')));
+        t.appendChild(ph2);
+      };
+      img.src = cfg.cover;
+      t.appendChild(img);
+    }
+    if (withPlay) t.appendChild(playIcon());
+    var chip = thumbJumpChip(cfg);
+    if (chip) t.appendChild(chip);
+    return t;
+  }
+
+  // 在 data.js 的 heroJumps 里按标题（或机构名）精确匹配到具体条目
+  function resolveJump(cfg) {
+    var i;
+    var vids = list(D.videoWorks);
+    var arts = list(D.articleWorks);
+    var exps = list(D.experiences);
+
+    if (!blank(cfg.video)) {
+      for (i = 0; i < vids.length; i++) {
+        if (vids[i].title === cfg.video) return { type: 'video', item: vids[i] };
+      }
+    }
+    if (!blank(cfg.article)) {
+      for (i = 0; i < arts.length; i++) {
+        if (arts[i].title === cfg.article) return { type: 'article', item: arts[i] };
+      }
+    }
+    if (!blank(cfg.experience)) {
+      for (i = 0; i < exps.length; i++) {
+        if (exps[i].org === cfg.experience) return { type: 'experience', item: exps[i] };
+      }
+    }
+    return null;
+  }
+
+  function runJump(target) {
+    if (!target) return;
+    if (target.type === 'video') { openVideo(target.item); return; }
+    if (target.type === 'article') { openItem(target.item, 'article'); return; }
+
+    // 实习：滚到那一条，并闪一下边框
+    var expBox = $('#experience-list');
+    if (!expBox) return;
+    var nodes = $$('.exp', expBox);
+    var hit = null;
+    nodes.forEach(function (n) {
+      if (hit) return;
+      var org = n.querySelector('.exp__org');
+      if (org && org.textContent === target.item.org) hit = n;
+    });
+    if (!hit) return;
+    nodes.forEach(function (n) { n.classList.remove('is-flash'); });
+    hit.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    hit.classList.add('is-flash');
+    window.setTimeout(function () { hit.classList.remove('is-flash'); }, 2400);
+  }
+
+  function initHeroJumps() {
+    var box = $('#hero-jumps');
+    var grid = $('#hero-jumps-grid');
+    if (!box || !grid) return;
+
+    var jumps = list(PROFILE.heroJumps).filter(function (j) {
+      return j && !blank(j.title);
+    });
+    if (!jumps.length) { box.hidden = true; return; }
+
+    grid.innerHTML = '';
+    jumps.forEach(function (cfg) {
+      var target = resolveJump(cfg);
+      if (!target) return;
+
+      var node = el('article', 'jcard');
+      node.tabIndex = 0;
+      node.setAttribute('role', 'button');
+      node.setAttribute('aria-label', val(cfg.label, '') + '：' + cfg.title);
+
+      node.appendChild(jumpThumb(cfg, target.type === 'video'));
+
+      var body = el('div', 'jcard__body');
+      body.appendChild(el('div', 'jcard__title', cfg.title));
+      if (!blank(cfg.note)) body.appendChild(el('div', 'jcard__note', cfg.note));
+      if (!blank(cfg.go)) body.appendChild(el('div', 'jcard__go', cfg.go));
+      node.appendChild(body);
+
+      function activate() { runJump(target); }
+      node.addEventListener('click', activate);
+      node.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+          e.preventDefault();
+          activate();
+        }
+      });
+      grid.appendChild(node);
+    });
+
+    if (!grid.children.length) { box.hidden = true; return; }
+    box.hidden = false;
+    var hero = document.getElementById('top');
+    if (hero) hero.classList.add('has-jumps');
   }
 
   /* ---------------- 关于我 ---------------- */
@@ -583,6 +756,7 @@
   initContact();
   initHero();
   initModal();
+  initHeroJumps();
   initNav();
   initSpy();
   initReveal();

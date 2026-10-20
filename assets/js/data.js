@@ -10,9 +10,9 @@ window.PORTFOLIO_DATA = {
 
   /* ---------------- 站点基础信息 ---------------- */
   site: {
-    title: "任建康 · 个人作品集",
+    title: "任建康 | 内容策划 · 视频制作 · 2027 届",
     brand: "任建康",                       // 左上角显示的字
-    description: "新闻传播学硕士个人作品集：视频作品、图文作品与联系方式。",
+    description: "任建康，西安外国语大学新闻传播学硕士（2027 届）。内容策划、视频拍摄与剪辑、投放素材制作，附成片与图文作品。",
     eyebrow: "Portfolio 2026",
     footer: "© {year} 任建康 · 个人作品集",   // {year} 会自动替换成当前年份
 
@@ -60,6 +60,53 @@ window.PORTFOLIO_DATA = {
     name: "任建康",
     // 用 \n 可以换行显示
     title: "新闻传播学硕士 西安外国语大学\n翻译学士 湖南工业大学",
+
+    // 首屏一句话定位（留空则不显示这一行）
+    tagline: "",
+    // 首屏数字条。留空数组 [] 时，自动按「视频 / 图文 / 实习」的条数计算
+    heroMetrics: [
+      { num: "11", label: "支成片" },
+      { num: "10", label: "条投放素材" },
+      { num: "4", label: "段实习实践" }
+    ],
+    // 首屏档期提示；留空字符串则不显示
+    availability: "2027 届 7 月毕业，可异地择业",
+
+    // 首屏三个快捷入口
+    //   label    缩略图左上角的可点角标文字（点它跳到 section 指定的板块）
+    //   section  角标跳转目标：video / article / experience
+    //   title    卡片标题   note 一行补充   go 右下角动作文字   cover 封面图
+    //   video / article / experience 三选一，决定「点卡片本体」做什么
+    heroJumps: [
+      {
+        label: "视频",
+        section: "video",
+        title: "「三福时尚」视频广告",
+        note: "广告短片 · 省级二等奖",
+        go: "点开即播 ▶",
+        cover: "assets/images/cover-daguangsai.jpg",
+        video: "「三福时尚」视频广告"
+      },
+      {
+        label: "图文",
+        section: "article",
+        title: "微博热搜舆论结构分析",
+        note: "Python 采集 · 数据可视化",
+        go: "查看详情 ↗",
+        cover: "assets/images/cover-weibo-insight.png",
+        article: "微博热搜舆论结构分析：榜单热度与真实讨论量的错位"
+      },
+      {
+        label: "实习",
+        section: "experience",
+        title: "影石 360 · 千川投放素材",
+        note: "旷世传声 · AI 混剪",
+        go: "点开即播 ▶",
+        cover: "assets/images/cover-insta-x5-82.jpg",
+        video: "影石 360 · X5 混剪 82"
+      }
+    ],
+
     avatar: "",                            // 头像图片路径，例如 "assets/images/avatar.jpg"；留空则显示姓氏
     location: "陕西 · 西安",
     email: "leavy0804@foxmail.com",
