@@ -161,6 +161,72 @@ h1, h2, h3, p, ul { margin: 0; }
   border-radius: 50%; border: 2px solid var(--accent); background: var(--accent-soft);
 }
 
+/* ---------------- 首屏数字条 ---------------- */
+.hero__metrics {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  margin-bottom: 16px;
+}
+.hero.has-metrics .hero__tagline { margin-bottom: 18px; }
+.hero__metric {
+  display: flex; align-items: baseline; gap: 7px;
+  padding-right: 20px; margin-right: 20px; border-right: 1px solid var(--border);
+}
+.hero__metric:last-child { padding-right: 0; margin-right: 0; border-right: 0; }
+.hero__metric-num {
+  font-size: 23px; font-weight: 650; line-height: 1; letter-spacing: -.01em;
+  font-variant-numeric: tabular-nums;
+}
+.hero__metric-label { font-size: 13.2px; color: var(--muted); white-space: nowrap; }
+
+/* ---------------- 首屏档期提示 ---------------- */
+.hero__avail {
+  display: inline-block; margin: 0 0 26px; padding: 6px 14px;
+  font-size: 13px; color: var(--fg-soft); line-height: 1.5;
+  background: var(--bg-soft); border: 1px solid var(--border); border-radius: 999px;
+}
+
+/* ---------------- 首屏三个快捷入口 ---------------- */
+.hero.has-jumps .hero__inner { padding-bottom: 40px; }
+.hero__jumps { padding-bottom: 56px; }
+.hero__jumps-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+
+.jcard {
+  display: flex; flex-direction: column; overflow: hidden; text-align: left;
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-sm);
+  cursor: pointer; outline: none;
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.jcard:hover, .jcard:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--border-hover); }
+.jcard:focus-visible { box-shadow: 0 0 0 3px var(--accent-soft), var(--shadow); }
+/* 竖版素材在首屏统一裁成横版，保证三个入口一样高 */
+.jcard .thumb { aspect-ratio: 16 / 9; }
+.jcard .thumb__play { width: 38px; height: 38px; }
+
+/* 缩略图左上角的板块角标：点它跳到对应板块，不触发卡片本体的播放 / 详情 */
+.thumb__jump {
+  position: absolute; left: 10px; top: 10px; z-index: 3;
+  padding: 4px 12px; border-radius: 999px;
+  background: rgba(255, 255, 255, .93); color: #14161c;
+  border: 1px solid rgba(255, 255, 255, .55);
+  font-size: 12px; font-weight: 650; letter-spacing: .05em; line-height: 1.5;
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  box-shadow: 0 2px 8px rgba(9, 11, 15, .18);
+  transition: background .16s, color .16s, border-color .16s;
+}
+.thumb__jump:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.jcard__body { display: grid; gap: 6px; padding: 14px 16px 16px; }
+.jcard__title { font-size: 15.2px; font-weight: 620; line-height: 1.45; }
+.jcard__note { font-size: 12.6px; color: var(--muted); line-height: 1.6; }
+.jcard__go {
+  margin-top: 2px; padding-top: 10px; border-top: 1px solid var(--border);
+  font-size: 12.8px; font-weight: 550; color: var(--accent-ink);
+}
+
+/* 从首屏跳到某段实习时的高亮提示 */
+.exp { transition: box-shadow .35s ease, border-color .35s ease; }
+.exp.is-flash { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent), var(--shadow); }
+
 /* ---------------- 板块 ---------------- */
 .section { padding: 72px 0; border-top: 1px solid var(--border); }
 .section__head { max-width: 62ch; margin-bottom: 34px; }
@@ -346,6 +412,18 @@ a.social:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); bord
 /* 竖版卡片在窄屏下也不会被压变形 */
 @media (max-width: 560px) {
   .modal__media--portrait { height: auto; width: 100%; }
+}
+
+/* ---------------- 首屏新增块的响应式 ---------------- */
+@media (max-width: 640px) {
+  .hero__metrics { margin-bottom: 14px; }
+  .hero__metric { padding-right: 13px; margin-right: 13px; }
+  .hero__metric-num { font-size: 20px; }
+  .hero__metric-label { font-size: 12.4px; }
+  .hero__avail { margin-bottom: 22px; font-size: 12.6px; }
+  .hero__jumps { padding-bottom: 42px; }
+  .hero__jumps-grid { grid-template-columns: 1fr; gap: 12px; }
+  .jcard__title { font-size: 14.6px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
