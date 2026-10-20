@@ -1,6 +1,13 @@
 # 素材原件目录不参与成站，避免误传到线上（体积大、含未采用素材）
 Paper&video media/
 
+# 本地同步 / 推送脚本（只在你自己电脑上有意义，不该发布）
+/*.bat
+
+# Python 运行产物
+__pycache__/
+*.pyc
+
 # 系统 / 编辑器
 .DS_Store
 Thumbs.db
