@@ -50,7 +50,7 @@ window.PORTFOLIO_DATA = {
       contact: {
         kicker: "Contact",
         title: "联系方式",
-        desc: "如果契合贵司用人需求，请随时联系，会及时回复。"
+        desc: ""
       }
     }
   },
