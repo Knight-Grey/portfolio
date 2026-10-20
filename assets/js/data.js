@@ -67,7 +67,7 @@ window.PORTFOLIO_DATA = {
     heroMetrics: [
       { num: "11", label: "支成片" },
       { num: "10", label: "条投放素材" },
-      { num: "4", label: "段实习实践" }
+      { num: "3", label: "段实习实践" }
     ],
     // 首屏档期提示；留空字符串则不显示
     availability: "2027 届 7 月毕业，可异地择业",
