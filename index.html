@@ -37,12 +37,21 @@
           <h1 class="hero__name" id="hero-name"></h1>
           <p class="hero__title" id="hero-title"></p>
           <p class="hero__tagline" id="hero-tagline"></p>
+          <div class="hero__metrics" id="hero-metrics" hidden></div>
+          <p class="hero__avail" id="hero-avail" hidden></p>
           <div class="hero__actions" id="hero-actions"></div>
         </div>
         <aside class="hero__card">
           <div class="avatar" id="hero-avatar" aria-hidden="true"></div>
           <ul class="highlights" id="hero-highlights"></ul>
         </aside>
+      </div>
+
+      <!-- 首屏三个快捷入口：视频 / 图文 / 实习，点一下直达具体作品或某段实习（内容在 data.js 的 heroJumps 里改） -->
+      <div class="wrap">
+        <div class="hero__jumps" id="hero-jumps" hidden>
+          <div class="hero__jumps-grid" id="hero-jumps-grid"></div>
+        </div>
       </div>
     </section>
 
