@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>热搜是热搜，讨论是讨论 · 微博热点讨论结构分析</title>
+<meta name="description" content="抓取微博热搜前十话题的博文与评论，观察平台议程与网民讨论之间的错位。">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Data Story · 微博舆情</p>
+    <h1>热搜是热搜，<br><em>讨论是讨论</em></h1>
+    <p class="lede">
+      平台榜单给出来的「热度」，和网民真实的讨论量，并不总是一回事。
+      这份分析抓取了同一时点里微博热搜前十的话题、相关博文与评论区数据，
+      用四个切面去看「被排上议程的事」和「真正在吵的事」之间的缝隙。
+    </p>
+    <div class="meta">
+      <span>数据：微博热搜榜 / 话题搜索页 / 评论接口</span>
+      <span>采集：自主编写的 Python 采集器</span>
+      <span id="meta-batch">批次：—</span>
+      <span id="meta-time">生成时间：—</span>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <div class="num" id="kpi-topics">—</div>
+        <div class="label">热搜话题</div>
+      </div>
+      <div class="kpi">
+        <div class="num" id="kpi-posts">—</div>
+        <div class="label">纳入分析的博文</div>
+      </div>
+      <div class="kpi">
+        <div class="num" id="kpi-comments">—</div>
+        <div class="label">采集到的评论</div>
+      </div>
+      <div class="kpi">
+        <div class="num" id="kpi-coverage">—</div>
+        <div class="label">评论采集覆盖率</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================ 01 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">01</span>
+        <h2>榜上最热的话题，评论区未必最热</h2>
+      </div>
+      <p class="takeaway">
+        灰色是话题在榜单上的<strong>热度占比</strong>，橙色是它在<strong>实际评论量</strong>中的占比。
+        两条长度差得越多，说明「平台认为重要的事」与「网民真正在议论的事」偏离得越远。
+      </p>
+
+      <div class="card">
+        <p class="card-title">各话题：榜单热度占比 vs 实际评论占比</p>
+        <div id="chart-gap"><p class="empty">正在读取数据…</p></div>
+        <div class="legend">
+          <span><i style="background:#c9c0b6"></i>榜单热度占比</span>
+          <span><i style="background:#d94f2b"></i>实际评论占比</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 02 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">02</span>
+        <h2>话题是有生命周期的</h2>
+      </div>
+      <p class="takeaway">
+        把评论按发布时间铺到 24 小时上，能看出每个话题的形态：
+        <strong>上午爆发、午后回落</strong>，还是<strong>缓慢累积的长尾</strong>。
+        热搜榜只有一个瞬时排名，而讨论的时间结构，藏在评论里。
+      </p>
+
+      <div class="card">
+        <p class="card-title">各话题评论量的小时分布（北京时间）</p>
+        <div id="chart-hours"><p class="empty">正在读取数据…</p></div>
+        <div class="legend" id="legend-hours"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 03 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">03</span>
+        <h2>谁在带动讨论</h2>
+      </div>
+      <p class="takeaway">
+        同一个话题，不同账号发出来的博文，拿到的互动量可以差两个数量级。
+        横条是博文的点赞数，颜色标注发布渠道——<strong>账号类型本身就决定了议题能传多远</strong>。
+      </p>
+
+      <div class="card">
+        <p class="card-title">互动量最高的博文（按点赞数）</p>
+        <div id="chart-posts"><p class="empty">正在读取数据…</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 04 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">04</span>
+        <h2>谁在说话：IP 属地的分布</h2>
+      </div>
+      <p class="takeaway">
+        评论者的 IP 属地分布，可以看出话题的<strong>地域敏感性</strong>——
+        有些是全国性议题，有些明显集中在某几个省份。
+      </p>
+
+      <div class="card">
+        <p class="card-title">评论区 IP 属地 Top 10</p>
+        <div id="chart-regions"><p class="empty">正在读取数据…</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 05 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">05</span>
+        <h2>情绪温度：同一件事，不同的火气</h2>
+      </div>
+      <p class="takeaway">
+        把每条评论判成正 / 中 / 负，看各个话题的情绪配比。
+        <strong>负面占比高不一定是坏事</strong>——有些议题本来就是在骂声里推进的；
+        而<strong>中性占比高</strong>，往往说明大家还在讨论事实，而不是急着站队。
+      </p>
+
+      <div class="card">
+        <p class="card-title">各话题评论的情绪构成（占该话题评论数的比例）</p>
+        <div id="chart-sentiment"><p class="empty">正在读取数据…</p></div>
+        <div class="legend">
+          <span><i style="background:#3f7a54"></i>正面</span>
+          <span><i style="background:#c9c0b6"></i>中性</span>
+          <span><i style="background:#b03a2e"></i>负面</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 06 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">06</span>
+        <h2>评论区里被顶起来的那些话</h2>
+      </div>
+      <p class="takeaway">
+        按点赞数排序的高赞评论。它们往往不是信息量最大的，而是
+        <strong>最能代表一种情绪的</strong>——这是理解舆论温度最直接的入口。
+      </p>
+
+      <div class="comments" id="comments"><p class="empty">正在读取数据…</p></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 07 -->
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="section-num">07</span>
+        <h2>方法与局限</h2>
+      </div>
+      <p class="takeaway">
+        数据能说明什么，比数据本身更重要。<strong>这一节主动交代边界</strong>，
+        因为任何一份没有边界说明的舆情结论，都经不起追问。
+      </p>
+
+      <div class="method">
+        <h3>HOW IT WAS DONE / 数据与方法</h3>
+        <ol>
+          <li><b>数据来源</b>：微博热搜榜公开接口、话题搜索页、微博评论接口。全部为公开可见内容。</li>
+          <li><b>采集范围</b>：热搜前 N 名话题 → 每个话题按「热门」排序取前若干条博文 → 每条博文抓取评论区分页数据。</li>
+          <li><b>评论覆盖率</b>：<b id="method-coverage">—</b>。微博的评论接口在若干页后会让分页游标归零，
+              因此这个数字是平台机制造成的上限，<b>不是全量</b>。</li>
+          <li><b>样本偏差</b>：博文是「热门」排序下的前几条，天然偏向高互动内容；话题评论量越大，覆盖率越低。</li>
+          <li><b>IP 属地</b>：是评论发布时的网络出口归属地，<b>不等于</b>用户籍贯或常住地，只能作为粗略的地理线索。</li>
+          <li><b>情感判定</b>：用<b>情感词典 + 否定词 / 程度副词规则</b>打分后归为正、中、负三类，
+              <b>不是模型分类</b>。规则法的好处是可解释、可复现，代价是<b>判不出反讽和反问</b>
+              （"呵呵真棒" 会被判成正面）。因此情绪那一节<b>只看整体分布，不适合逐条引用</b>。</li>
+          <li><b>时间截面</b>：这是一次固定时点的快照，不含历史趋势与传播路径（转发链未被采集）。</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>数据采集与分析：自主编写（Python 采集器 + 前端可视化，零第三方依赖）</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+<!-- 数据先加载，再画画：这样双击 index.html 也能看（file:// 下 fetch 会被浏览器拦截） -->
+<script src="data/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
