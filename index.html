@@ -80,13 +80,6 @@
           <p class="section__desc" id="method-desc"></p>
         </header>
         <div class="methods" id="method-list"></div>
-        <figure class="evidence" id="method-evidence" hidden>
-          <img id="method-evidence-img" alt="直播运营数据大屏截图" loading="lazy" />
-          <figcaption>
-            <span id="method-evidence-caption"></span>
-            <span id="method-evidence-note" class="evidence__note"></span>
-          </figcaption>
-        </figure>
       </section>
 
       <!-- 视频作品 -->
@@ -136,6 +129,16 @@
       <span class="footer__hint">本站由静态页面搭建，内容可在 data.js 中随时修改</span>
     </div>
   </footer>
+
+  <!-- ============ 图片放大层（点击技能卡里的数据图） ============ -->
+  <div class="lightbox" id="lightbox" hidden>
+    <div class="lightbox__backdrop" data-lightbox-close></div>
+    <figure class="lightbox__panel">
+      <img id="lightbox-img" alt="" />
+      <figcaption id="lightbox-cap"></figcaption>
+      <button class="lightbox__close" type="button" data-lightbox-close aria-label="关闭">✕</button>
+    </figure>
+  </div>
 
   <!-- ============ 个人网站内嵌层（点导航里的「个人网站」时打开，不跳走） ============ -->
   <div class="embed" id="embed" hidden>
@@ -195,7 +198,36 @@
         });
       }
 
-      /* 方法与工具：三块并列，内容在 data.js 的 methods 里改 */
+      /* 图片放大层 */
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lightbox-img');
+      var lbCap = document.getElementById('lightbox-cap');
+
+      function openLightbox(src, caption) {
+        if (!lb) return;
+        lbImg.src = src;
+        lbImg.alt = caption || '';
+        lbCap.textContent = caption || '';
+        lb.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        if (!lb) return;
+        lb.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      if (lb) {
+        lb.querySelectorAll('[data-lightbox-close]').forEach(function (b) {
+          b.addEventListener('click', closeLightbox);
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !lb.hidden) closeLightbox();
+        });
+      }
+
+      /* 方法与工具 / 专业技能：三块并列，内容在 data.js 的 methods 里改 */
       var methodSec = document.getElementById('method');
       var methodBox = document.getElementById('method-list');
       var methods = Array.isArray(D.methods) ? D.methods : [];
@@ -235,22 +267,26 @@
               });
               card.appendChild(ul);
             }
+
+            if (m.image) {
+              var fig = document.createElement('figure');
+              fig.className = 'method__fig';
+              var img = document.createElement('img');
+              img.src = m.image;
+              img.alt = m.imageCaption || '数据截图';
+              img.loading = 'lazy';
+              img.addEventListener('click', function () { openLightbox(m.image, m.imageCaption); });
+              fig.appendChild(img);
+              if (m.imageCaption) {
+                var cap = document.createElement('figcaption');
+                cap.textContent = m.imageCaption;
+                fig.appendChild(cap);
+              }
+              card.appendChild(fig);
+            }
+
             methodBox.appendChild(card);
           });
-        }
-      }
-
-      /* 佐证图：直播运营数据大屏 */
-      var evFig = document.getElementById('method-evidence');
-      var evData = D.methodEvidence || {};
-      if (evFig) {
-        if (!evData.image) {
-          evFig.hidden = true;
-        } else {
-          evFig.hidden = false;
-          document.getElementById('method-evidence-img').src = evData.image;
-          document.getElementById('method-evidence-caption').textContent = evData.caption || '';
-          document.getElementById('method-evidence-note').textContent = evData.note || '';
         }
       }
 

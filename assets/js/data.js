@@ -465,15 +465,16 @@ window.PORTFOLIO_DATA = {
         "跑不动时按顺序换：先换前三秒，再换卖点顺序，最后才动题材。",
         "单条数据只和同批、同位置的素材比，不和整个账号比，否则结论一定错。",
         "用抖音罗盘与巨量千川看消耗、转化与 ROI，按日复盘，改下一批素材。"
-      ]
+      ],
+      image: "assets/images/live-dashboard-0416.jpg",
+      imageCaption: "抖音电商罗盘 · 直播大屏（2026-04-16 场次）｜点击查看完整截图"
     },
     {
       title: "数据与工具",
       points: [
         "剪辑：Premiere Pro、Edius、剪映、Photoshop；拍摄：全画幅（尼康 / 索尼）。",
         "数据：Excel 做同批横向对比；Python 自建采集器抓微博热搜与评论，做成四切面分析页。",
-        "AI 工具：DeepSeek Harness、Codex 用于改站点、写脚本与批量处理素材；SeedDance 生成动态画面。",
-        "AI 只提高产出速度，不替代判断——选哪条、改哪里仍然由数据决定。"
+        "AI 工具：DeepSeek Harness、Codex 用于改站点、写脚本与批量处理素材；SeedDance 生成动态画面。"
       ]
     }
   ],
