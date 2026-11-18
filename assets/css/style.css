@@ -8,13 +8,19 @@
 
 /* ---------- 1. 设计变量 ---------- */
 :root {
-  --bg: #fafafa;
+  /* 底色用微暖的纸白，比纯白耐看，长时间看不刺眼 */
+  --bg: #faf9f6;
   --bg-elevated: #ffffff;
-  --text: #1a1a1a;
-  --text-muted: #5c5c5c;
-  --text-faint: #8c8c8c;
-  --line: #e6e6e6;
-  --line-strong: #d4d4d4;
+  --text: #191a1c;
+  --text-muted: #55585c;
+  --text-faint: #8a8882;
+  --line: #e8e5de;
+  --line-strong: #d5d1c8;
+
+  /* 唯一强调色：低饱和墨绿，只出现在可交互状态与少量点缀 */
+  --accent: #2f4a44;
+  --accent-soft: rgba(47, 74, 68, 0.09);
+
   --radius: 6px;
   --radius-lg: 10px;
 
@@ -135,14 +141,14 @@ ul, ol { list-style: none; }
   position: absolute;
   left: 0; right: 0; bottom: 0;
   height: 1px;
-  background: var(--text);
+  background: var(--accent);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.3s var(--ease);
 }
 
 .nav__link:hover,
-.nav__link.is-active { color: var(--text); }
+.nav__link.is-active { color: var(--accent); }
 
 .nav__link:hover::after,
 .nav__link.is-active::after { transform: scaleX(1); }
@@ -171,11 +177,11 @@ ul, ol { list-style: none; }
 .btn:hover { border-color: var(--text); }
 
 .btn--primary {
-  background: var(--text);
-  border-color: var(--text);
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
 }
-.btn--primary:hover { background: #333; border-color: #333; }
+.btn--primary:hover { background: #243a35; border-color: #243a35; }
 
 .btn--sm { min-height: 36px; padding: 0 1rem; font-size: 0.85rem; }
 
@@ -271,8 +277,8 @@ ul, ol { list-style: none; }
 
 .index__link:hover { color: var(--text-muted); }
 
-.index__link.is-active { color: var(--text); }
-.index__link.is-active::before { background: var(--text); }
+.index__link.is-active { color: var(--accent); }
+.index__link.is-active::before { background: var(--accent); }
 
 .nav__link--ext,
 .index__link--ext { color: var(--text-muted); }
@@ -549,8 +555,8 @@ ul, ol { list-style: none; }
 .chip:hover { border-color: var(--line-strong); color: var(--text); }
 
 .chip.is-active {
-  background: var(--text);
-  border-color: var(--text);
+  background: var(--accent);
+  border-color: var(--accent);
   color: #fff;
 }
 
