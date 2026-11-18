@@ -9,17 +9,20 @@
 /* ---------- 1. 设计变量 ---------- */
 :root {
   /* 底色用微暖的纸白，比纯白耐看，长时间看不刺眼 */
-  --bg: #faf9f6;
+  --bg: #faf8f4;
   --bg-elevated: #ffffff;
-  --text: #191a1c;
-  --text-muted: #55585c;
-  --text-faint: #8a8882;
-  --line: #e8e5de;
-  --line-strong: #d5d1c8;
+  --text: #16171a;
+  --text-muted: #4f5357;
+  --text-faint: #85837d;
+  --line: #e9e5dc;
+  --line-strong: #d6d0c4;
 
   /* 唯一强调色：低饱和墨绿，只出现在可交互状态与少量点缀 */
   --accent: #2f4a44;
   --accent-soft: rgba(47, 74, 68, 0.09);
+
+  /* 卡片柔和投影，替代纯靠描边 */
+  --shadow-card: 0 1px 2px rgba(30, 28, 24, 0.04), 0 8px 20px -16px rgba(30, 28, 24, 0.18);
 
   --radius: 6px;
   --radius-lg: 10px;
@@ -1203,3 +1206,50 @@ ul, ol { list-style: none; }
   .modal { padding: 0.75rem; }
   .modal__panel { padding: 1.1rem; max-height: 92vh; }
 }
+
+/* ==========================================================================
+   16. 视觉细节（最后一层打磨）
+   ========================================================================== */
+body {
+  background-image: linear-gradient(180deg, #fcfaf6 0%, var(--bg) 340px);
+  background-repeat: no-repeat;
+}
+
+.card,
+.jcard,
+.method,
+.social {
+  box-shadow: var(--shadow-card);
+  transition: box-shadow .25s var(--ease), transform .25s var(--ease), border-color .25s var(--ease);
+}
+
+.card:hover,
+.jcard:hover,
+.method:hover,
+.social:hover {
+  box-shadow: 0 2px 4px rgba(30, 28, 24, .05), 0 16px 32px -20px rgba(30, 28, 24, .3);
+}
+
+/* 小节英文标签前加一小段墨绿短线，代替纯灰的弱提示 */
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+}
+
+.kicker::before {
+  content: "";
+  width: 16px;
+  height: 1px;
+  background: var(--accent);
+  opacity: .5;
+  flex: none;
+}
+
+.section__title { letter-spacing: -.02em; }
+
+.hero__name { text-wrap: balance; }
+
+/* 缩略图在触屏上也有轻微反馈 */
+.card:active,
+.jcard:active { transform: scale(.995); }
