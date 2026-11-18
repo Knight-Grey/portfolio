@@ -35,7 +35,6 @@
     <aside class="rail rail--left" aria-label="个人档案">
       <div class="profile">
         <div class="avatar" id="hero-avatar" aria-hidden="true"></div>
-        <p class="profile__name" id="rail-name"></p>
         <p class="profile__meta" id="rail-meta"></p>
         <ul class="highlights" id="hero-highlights"></ul>
         <div class="profile__links" id="rail-links"></div>
@@ -166,9 +165,6 @@
       var D = window.PORTFOLIO_DATA || {};
       var P = D.profile || {};
       var S = D.site || {};
-
-      var nameEl = document.getElementById('rail-name');
-      if (nameEl) nameEl.textContent = P.name || '';
 
       var metaEl = document.getElementById('rail-meta');
       if (metaEl) {
