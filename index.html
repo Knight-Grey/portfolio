@@ -80,6 +80,13 @@
           <p class="section__desc" id="method-desc"></p>
         </header>
         <div class="methods" id="method-list"></div>
+        <figure class="evidence" id="method-evidence" hidden>
+          <img id="method-evidence-img" alt="直播运营数据大屏截图" loading="lazy" />
+          <figcaption>
+            <span id="method-evidence-caption"></span>
+            <span id="method-evidence-note" class="evidence__note"></span>
+          </figcaption>
+        </figure>
       </section>
 
       <!-- 视频作品 -->
@@ -230,6 +237,20 @@
             }
             methodBox.appendChild(card);
           });
+        }
+      }
+
+      /* 佐证图：直播运营数据大屏 */
+      var evFig = document.getElementById('method-evidence');
+      var evData = D.methodEvidence || {};
+      if (evFig) {
+        if (!evData.image) {
+          evFig.hidden = true;
+        } else {
+          evFig.hidden = false;
+          document.getElementById('method-evidence-img').src = evData.image;
+          document.getElementById('method-evidence-caption').textContent = evData.caption || '';
+          document.getElementById('method-evidence-note').textContent = evData.note || '';
         }
       }
 

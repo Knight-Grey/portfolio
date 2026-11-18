@@ -823,6 +823,32 @@ ul, ol { list-style: none; }
   .methods { grid-template-columns: 1fr; }
 }
 
+/* 佐证图 */
+.evidence {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.evidence img {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: #111;
+}
+
+.evidence figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.2rem;
+  margin-top: 0.9rem;
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+.evidence__note { color: var(--text-muted); }
+
 /* ---------- 11b. 技能 ---------- */
 .skills {
   display: grid;
