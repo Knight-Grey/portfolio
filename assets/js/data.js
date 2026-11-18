@@ -10,18 +10,18 @@ window.PORTFOLIO_DATA = {
 
   /* ---------------- 站点基础信息 ---------------- */
   site: {
-    title: "任建康 · 个人作品集",
+    title: "任建康 | 内容策划 · 视频制作 · 2027 届",
     brand: "任建康",                       // 左上角显示的字
-    description: "新闻传播学硕士个人作品集：视频作品、图文作品与联系方式。",
+    description: "任建康，西安外国语大学新闻传播学硕士（2027 届）。内容策划、视频拍摄与剪辑、投放素材制作，附成片与图文作品。",
     eyebrow: "Portfolio 2026",
     footer: "© {year} 任建康 · 个人作品集",   // {year} 会自动替换成当前年份
 
     // 顶部导航（id 要和下面的板块对应，顺序可调，不需要的删掉即可）
     nav: [
-      { id: "about",      label: "关于我" },
+      { id: "experience", label: "实习与实践" },
+      { id: "method",     label: "方法与工具" },
       { id: "video",      label: "视频作品" },
       { id: "article",    label: "图文作品" },
-      { id: "experience", label: "实习与实践" },
       { id: "contact",    label: "联系方式" }
     ],
 
@@ -45,12 +45,17 @@ window.PORTFOLIO_DATA = {
       experience: {
         kicker: "Experience",
         title: "实习与实践",
-        desc: "媒体、平台与商业内容三条线上的实践经历。"
+        desc: "媒体、平台与商业内容三条线上的实践经历，每条都尽量落到可核对的数字。"
+      },
+      method: {
+        kicker: "Method",
+        title: "方法与工具",
+        desc: "我怎么判断一条内容能不能跑、跑不动时改哪一环。这里是流程，不是口号。"
       },
       contact: {
         kicker: "Contact",
         title: "联系方式",
-        desc: "如果契合贵司用人需求，请随时联系，会及时回复。"
+        desc: ""
       }
     }
   },
@@ -60,11 +65,59 @@ window.PORTFOLIO_DATA = {
     name: "任建康",
     // 用 \n 可以换行显示
     title: "新闻传播学硕士 西安外国语大学\n翻译学士 湖南工业大学",
+
+    // 首屏一句话定位（留空则不显示这一行）
+    tagline: "内容运营 / IP 运营 / 电商运营方向",
+    // 首屏数字条。留空数组 [] 时，自动按「视频 / 图文 / 实习」的条数计算
+    heroMetrics: [
+      { num: "11", label: "支参考成片" },
+      { num: "10", label: "条参考素材" },
+      { num: "4", label: "段实习实践" }
+    ],
+    // 首屏档期提示；留空字符串则不显示
+    availability: "2027 届 7 月毕业，可异地择业",
+
+    // 首屏三个快捷入口
+    //   label    缩略图左上角的可点角标文字（点它跳到 section 指定的板块）
+    //   section  角标跳转目标：video / article / experience
+    //   title    卡片标题   note 一行补充   go 右下角动作文字   cover 封面图
+    //   video / article / experience 三选一，决定「点卡片本体」做什么
+    heroJumps: [
+      {
+        label: "实习",
+        section: "experience",
+        title: "影石 360 · 千川投放素材",
+        note: "旷世传声 · AI 混剪 · 多版本跑量",
+        go: "点开即播 ▶",
+        cover: "assets/images/cover-insta-x5-82.jpg",
+        video: "影石 360 · X5 混剪 82"
+      },
+      {
+        label: "图文",
+        section: "article",
+        title: "微博热搜舆论结构分析",
+        note: "Python 采集 · 数据可视化",
+        go: "查看详情 ↗",
+        cover: "assets/images/cover-weibo-insight.png",
+        article: "微博热搜舆论结构分析：榜单热度与真实讨论量的错位"
+      },
+      {
+        label: "视频",
+        section: "video",
+        title: "「三福时尚」视频广告",
+        note: "广告短片 · 省级二等奖",
+        go: "点开即播 ▶",
+        cover: "assets/images/cover-daguangsai.jpg",
+        video: "「三福时尚」视频广告"
+      }
+    ],
+
     avatar: "",                            // 头像图片路径，例如 "assets/images/avatar.jpg"；留空则显示姓氏
     location: "陕西 · 西安",
     email: "leavy0804@foxmail.com",
     phone: "15829577031",                  // 公开页面会被爬虫抓取，介意就清空
     resume: "assets/files/任建康-简历.pdf", // 简历文件路径；留空则隐藏「下载简历」按钮
+    site: "https://earth-online-4s3.pages.dev/", // 个人网站地址；留空则隐藏顶部与目录里的「个人网站」入口
 
     // 关于我的正文段落（一个字符串一段）
     intro: [
@@ -75,7 +128,7 @@ window.PORTFOLIO_DATA = {
 
     // 首屏右上角卡片里的亮点条目
     highlights: [
-      "2025 硕士研究生学业奖学金 二等奖",
+      "2025 / 2026 硕士研究生学业奖学金 二等奖 / 三等奖",
       "第十七届全国大学生广告艺术大赛 陕西赛区省级二等奖",
       "湖南工业大学 校年度优秀记者",
       "《从部落到剧场微博与抖音用户平台化生存的媒介逻辑比较》收录于《大众电视》"
@@ -376,6 +429,49 @@ window.PORTFOLIO_DATA = {
         "负责学校党委机关信息收发，采编校园师生学术动态，组织审核成稿后刊登于校刊。",
         "任翻译 1801 班宣传委员、团支书，负责班级与学院组织部、宣传部的工作交接与落实。"
       ]
+    },
+    {
+      org: "Earth Online ·Rune 在旅（个人网站）",
+      role: "个人网站与自媒运营",
+      period: "2026—至今",
+      points: [
+        "独立完成个人网站的设计、编码与部署：Next.js 静态导出 + Cloudflare Pages，含摄影相册、个人出镜、杂谈、日志与音乐等板块。",
+        "站内影像均为本人拍摄与后期，题材覆盖二次元 cos 人像与商业拍摄；从选题、拍摄、剪辑到排版发布，全流程由本人独立完成。",
+        "以该站作为个人内容出口持续更新，同时对照相机材、剪辑工具与前端呈现做迭代优化。"
+      ],
+      url: "https://earth-online-4s3.pages.dev/",
+      urlLabel: "打开个人网站 ↗"
+    }
+  ],
+
+  /* ---------------- 方法与工具 ----------------
+     给运营 / 准产品岗看的：你怎么判断、怎么复盘。
+     title  一段小标题   points 三到四条做法，每条一句话
+     -------------------------------------------------- */
+  methods: [
+    {
+      title: "内容生产：从选题到复盘",
+      points: [
+        "选题先定「给谁看、看完要做什么」，再定形式；形式服从目的，不反过来。",
+        "拍摄前出脚本与分镜，现场按机位表走，减少返工——同样的时间能多出一版。",
+        "发布后 48 小时看前三秒留存、完播和互动，先判断是选题问题还是开头问题。"
+      ]
+    },
+    {
+      title: "投放与跑量",
+      points: [
+        "同一卖点先出多个开头版本，让数据挑，人只负责把差异做出来。",
+        "跑不动时按顺序换：先换前三秒，再换卖点顺序，最后才动题材。",
+        "单条数据只和同批、同位置的素材比，不和整个账号比，否则结论一定错。"
+      ]
+    },
+    {
+      title: "数据与工具",
+      points: [
+        "抖音罗盘、巨量千川看流量与转化；Excel 做同批对比，写清口径再下结论。",
+        "Python 自建采集器抓微博热搜与评论，做成四切面分析页（成品在「图文作品」里）。",
+        "AI 工具（SeedDance、剪辑辅助）用来批量出素材，不用来替代判断。"
+      ]
     }
   ],
 
@@ -387,6 +483,7 @@ window.PORTFOLIO_DATA = {
   socials: [
     { name: "手机", handle: "15829577031", url: "" },
     { name: "邮箱", handle: "leavy0804@foxmail.com", url: "mailto:leavy0804@foxmail.com" },
-    { name: "微信", handle: "Lemon0143", url: "" }
+    { name: "微信", handle: "Lemon0143", url: "" },
+    { name: "个人网站", handle: "earth-online-4s3.pages.dev", url: "https://earth-online-4s3.pages.dev/" }
   ]
 };

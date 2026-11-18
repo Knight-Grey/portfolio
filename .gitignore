@@ -13,3 +13,6 @@ __pycache__/
 Thumbs.db
 desktop.ini
 *.tmp
+
+# 本地备份目录不进仓库
+_备份_*/

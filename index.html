@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#2f54eb" />
+  <meta name="theme-color" content="#fafafa" />
   <title>个人作品集</title>
   <meta name="description" content="新闻传播学硕士个人作品集：视频作品、图文作品与联系方式。" />
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -28,40 +28,63 @@
     </div>
   </header>
 
-  <main id="main">
-    <!-- ============ 首屏 ============ -->
-    <section class="hero" id="top">
-      <div class="wrap hero__inner">
+  <!-- ============ 三栏骨架：左档案 / 中内容 / 右目录 ============ -->
+  <div class="shell wrap">
+
+    <!-- 左栏：常驻个人档案（滚动时固定在原位） -->
+    <aside class="rail rail--left" aria-label="个人档案">
+      <div class="profile">
+        <div class="avatar" id="hero-avatar" aria-hidden="true"></div>
+        <p class="profile__name" id="rail-name"></p>
+        <p class="profile__meta" id="rail-meta"></p>
+        <ul class="highlights" id="hero-highlights"></ul>
+        <div class="profile__links" id="rail-links"></div>
+      </div>
+    </aside>
+
+    <!-- 中栏：正文 -->
+    <main id="main">
+
+      <!-- 首屏 -->
+      <section class="hero" id="top">
         <div class="hero__text">
           <p class="eyebrow" id="hero-eyebrow"></p>
           <h1 class="hero__name" id="hero-name"></h1>
           <p class="hero__title" id="hero-title"></p>
           <p class="hero__tagline" id="hero-tagline"></p>
+          <div class="hero__metrics" id="hero-metrics" hidden></div>
+          <p class="hero__avail" id="hero-avail" hidden></p>
           <div class="hero__actions" id="hero-actions"></div>
         </div>
-        <aside class="hero__card">
-          <div class="avatar" id="hero-avatar" aria-hidden="true"></div>
-          <ul class="highlights" id="hero-highlights"></ul>
-        </aside>
-      </div>
-    </section>
 
-    <!-- ============ 关于我 ============ -->
-    <section class="section" id="about">
-      <div class="wrap">
+        <!-- 三个快捷入口：视频 / 图文 / 实习（内容在 data.js 的 heroJumps 里改） -->
+        <div class="hero__jumps" id="hero-jumps" hidden>
+          <div class="hero__jumps-grid" id="hero-jumps-grid"></div>
+        </div>
+      </section>
+
+      <!-- 实习与实践（放在最前：有结果、有数据，是运营岗最先看的东西） -->
+      <section class="section" id="experience" hidden>
         <header class="section__head">
-          <p class="kicker" id="about-kicker"></p>
-          <h2 class="section__title" id="about-title"></h2>
-          <p class="section__desc" id="about-desc"></p>
+          <p class="kicker" id="experience-kicker"></p>
+          <h2 class="section__title" id="experience-title"></h2>
+          <p class="section__desc" id="experience-desc"></p>
         </header>
-        <div class="stats" id="stats"></div>
-        <div class="about__body" id="about-body"></div>
-      </div>
-    </section>
+        <div class="timeline" id="experience-list"></div>
+      </section>
 
-    <!-- ============ 视频作品 ============ -->
-    <section class="section" id="video" hidden>
-      <div class="wrap">
+      <!-- 方法与工具（这一节是给运营 / 准产品岗看的：你怎么判断、怎么复盘） -->
+      <section class="section" id="method" hidden>
+        <header class="section__head">
+          <p class="kicker" id="method-kicker"></p>
+          <h2 class="section__title" id="method-title"></h2>
+          <p class="section__desc" id="method-desc"></p>
+        </header>
+        <div class="methods" id="method-list"></div>
+      </section>
+
+      <!-- 视频作品 -->
+      <section class="section" id="video" hidden>
         <header class="section__head">
           <p class="kicker" id="video-kicker"></p>
           <h2 class="section__title" id="video-title"></h2>
@@ -69,12 +92,10 @@
         </header>
         <div class="chips" id="video-chips" hidden></div>
         <div class="grid" id="video-grid"></div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ============ 图文作品 ============ -->
-    <section class="section" id="article" hidden>
-      <div class="wrap">
+      <!-- 图文作品 -->
+      <section class="section" id="article" hidden>
         <header class="section__head">
           <p class="kicker" id="article-kicker"></p>
           <h2 class="section__title" id="article-title"></h2>
@@ -82,33 +103,26 @@
         </header>
         <div class="chips" id="article-chips" hidden></div>
         <div class="grid" id="article-grid"></div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ============ 实习与实践 ============ -->
-    <section class="section" id="experience" hidden>
-      <div class="wrap">
-        <header class="section__head">
-          <p class="kicker" id="experience-kicker"></p>
-          <h2 class="section__title" id="experience-title"></h2>
-          <p class="section__desc" id="experience-desc"></p>
-        </header>
-        <div class="timeline" id="experience-list"></div>
-      </div>
-    </section>
-
-    <!-- ============ 联系方式 ============ -->
-    <section class="section" id="contact">
-      <div class="wrap">
+      <!-- 联系方式 -->
+      <section class="section" id="contact">
         <header class="section__head">
           <p class="kicker" id="contact-kicker"></p>
           <h2 class="section__title" id="contact-title"></h2>
           <p class="section__desc" id="contact-desc"></p>
         </header>
         <div class="socials" id="socials"></div>
-      </div>
-    </section>
-  </main>
+      </section>
+
+    </main>
+
+    <!-- 右栏：页内目录（滚动时高亮当前板块） -->
+    <aside class="rail rail--right" aria-label="页内目录">
+      <nav class="index" id="index"></nav>
+    </aside>
+
+  </div>
 
   <footer class="site-footer">
     <div class="wrap footer__inner">
@@ -116,6 +130,19 @@
       <span class="footer__hint">本站由静态页面搭建，内容可在 data.js 中随时修改</span>
     </div>
   </footer>
+
+  <!-- ============ 个人网站内嵌层（点导航里的「个人网站」时打开，不跳走） ============ -->
+  <div class="embed" id="embed" hidden>
+    <div class="embed__backdrop" data-embed-close></div>
+    <div class="embed__panel" role="dialog" aria-modal="true" aria-label="个人网站">
+      <div class="embed__bar">
+        <span class="embed__title">Earth Online ·Rune 在旅</span>
+        <a class="embed__ext" id="embed-ext" href="https://earth-online-4s3.pages.dev/" target="_blank" rel="noopener">新标签打开 ↗</a>
+        <button class="embed__close" type="button" data-embed-close aria-label="关闭">✕</button>
+      </div>
+      <iframe class="embed__frame" id="embed-frame" title="个人网站" loading="lazy" referrerpolicy="no-referrer"></iframe>
+    </div>
+  </div>
 
   <!-- ============ 作品弹层（视频播放 / 作品详情） ============ -->
   <div class="modal" id="modal" hidden>
@@ -133,5 +160,190 @@
 
   <script src="assets/js/data.js"></script>
   <script src="assets/js/main.js"></script>
+  <script>
+    /* 侧栏与页内目录：只补 data.js 里已有、main.js 没往这两处填的内容 */
+    (function () {
+      var D = window.PORTFOLIO_DATA || {};
+      var P = D.profile || {};
+      var S = D.site || {};
+
+      var nameEl = document.getElementById('rail-name');
+      if (nameEl) nameEl.textContent = P.name || '';
+
+      var metaEl = document.getElementById('rail-meta');
+      if (metaEl) {
+        var meta = [];
+        if (P.location) meta.push(P.location);
+        if (P.availability) meta.push(P.availability);
+        metaEl.textContent = meta.join(' · ');
+      }
+
+      /* 左栏底部的联系方式小图标 */
+      var linksEl = document.getElementById('rail-links');
+      if (linksEl) {
+        var socials = Array.isArray(D.socials) ? D.socials : [];
+        socials.forEach(function (s) {
+          var a = document.createElement(s.url ? 'a' : 'span');
+          a.className = 'profile__link';
+          a.textContent = String(s.name || '').slice(0, 2);
+          if (s.url) a.href = s.url;
+          if (s.name) a.title = s.name + '：' + (s.handle || '');
+          linksEl.appendChild(a);
+        });
+      }
+
+      /* 方法与工具：三块并列，内容在 data.js 的 methods 里改 */
+      var methodSec = document.getElementById('method');
+      var methodBox = document.getElementById('method-list');
+      var methods = Array.isArray(D.methods) ? D.methods : [];
+      var mCfg = (S.sections && S.sections.method) || {};
+      ['kicker', 'title', 'desc'].forEach(function (k) {
+        var el = document.getElementById('method-' + k);
+        if (el) el.textContent = mCfg[k] || '';
+      });
+      if (methodSec && methodBox) {
+        if (!methods.length) {
+          methodSec.hidden = true;
+        } else {
+          methodSec.hidden = false;
+          methodBox.innerHTML = '';
+          methods.forEach(function (m, i) {
+            var card = document.createElement('article');
+            card.className = 'method';
+
+            var no = document.createElement('span');
+            no.className = 'method__no';
+            no.textContent = String(i + 1).padStart(2, '0');
+
+            var h = document.createElement('h3');
+            h.className = 'method__title';
+            h.textContent = m.title || '';
+
+            card.appendChild(no);
+            card.appendChild(h);
+
+            if (Array.isArray(m.points) && m.points.length) {
+              var ul = document.createElement('ul');
+              ul.className = 'method__points';
+              m.points.forEach(function (p) {
+                var li = document.createElement('li');
+                li.textContent = p;
+                ul.appendChild(li);
+              });
+              card.appendChild(ul);
+            }
+            methodBox.appendChild(card);
+          });
+        }
+      }
+
+      /* 右栏页内目录 */
+      var nav = Array.isArray(S.nav) ? S.nav : [];
+      var indexEl = document.getElementById('index');
+
+      /* 个人网站：顶部导航与右栏目录各加一项（外链，新标签打开） */
+      var ext = (D.profile && D.profile.site) || S.site || null;
+      var extUrl = (D.profile && D.profile.site) ? D.profile.site : '';
+      var extLabel = '个人网站与自媒运营';
+
+      var topNav = document.getElementById('nav');
+      if (topNav && extUrl) {
+        var ea = document.createElement('a');
+        ea.className = 'nav__link nav__link--ext';
+        ea.href = extUrl;
+        ea.target = '_blank';
+        ea.rel = 'noopener';
+        ea.textContent = extLabel;
+        ea.addEventListener('click', openEmbed);
+        topNav.appendChild(ea);
+      }
+
+      /* 内嵌层：点「个人网站」在页内打开，不跳走 */
+      var embedEl = document.getElementById('embed');
+      var frameEl = document.getElementById('embed-frame');
+      var extLink = document.getElementById('embed-ext');
+
+      function openEmbed(e) {
+        if (!embedEl || !frameEl) return;
+        if (e) e.preventDefault();
+        if (!frameEl.getAttribute('src')) frameEl.setAttribute('src', extUrl);
+        if (extLink && extUrl) extLink.href = extUrl;
+        embedEl.hidden = false;
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeEmbed() {
+        if (!embedEl) return;
+        embedEl.hidden = true;
+        document.body.style.overflow = '';
+      }
+
+      if (embedEl) {
+        embedEl.querySelectorAll('[data-embed-close]').forEach(function (b) {
+          b.addEventListener('click', closeEmbed);
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && !embedEl.hidden) closeEmbed();
+        });
+      }
+
+      if (indexEl && nav.length) {
+        var title = document.createElement('p');
+        title.className = 'index__title';
+        title.textContent = '目录';
+        indexEl.appendChild(title);
+
+        nav.forEach(function (n) {
+          var a = document.createElement('a');
+          a.className = 'index__link';
+          a.href = '#' + n.id;
+          a.textContent = n.label;
+          a.dataset.target = n.id;
+          indexEl.appendChild(a);
+        });
+
+        if (extUrl) {
+          var ix = document.createElement('a');
+          ix.className = 'index__link index__link--ext';
+          ix.href = extUrl;
+          ix.target = '_blank';
+          ix.rel = 'noopener';
+          ix.textContent = extLabel;
+          ix.addEventListener('click', openEmbed);
+          indexEl.appendChild(ix);
+        }
+
+        /* 滚动高亮：顶部导航与右栏目录一起联动 */
+        var links = document.querySelectorAll('#index .index__link, #nav .nav__link');
+        var sections = [];
+        nav.forEach(function (n) {
+          var sec = document.getElementById(n.id);
+          if (sec) sections.push(sec);
+        });
+
+        function setActive(id) {
+          links.forEach(function (l) {
+            var t = l.dataset.target || (l.getAttribute('href') || '').replace('#', '');
+            l.classList.toggle('is-active', t === id);
+          });
+        }
+
+        if ('IntersectionObserver' in window && sections.length) {
+          var seen = {};
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              seen[en.target.id] = en.isIntersecting ? en.intersectionRatio : 0;
+            });
+            var best = null, bestV = 0;
+            Object.keys(seen).forEach(function (k) {
+              if (seen[k] > bestV) { bestV = seen[k]; best = k; }
+            });
+            if (best) setActive(best);
+          }, { rootMargin: '-20% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+          sections.forEach(function (s) { io.observe(s); });
+        }
+      }
+    })();
+  </script>
 </body>
 </html>
